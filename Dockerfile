@@ -1,20 +1,18 @@
 # Multi-stage production container for Match-Adaptive AI Cricket Ball Tracking & DRS System
 FROM python:3.11-slim
 
-# Prevent Python from writing .pyc files & enable unbuffered stdout
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    PORT=8501
 
 WORKDIR /app
 
-# Install system dependencies required for OpenCV and FFmpeg video processing
+# Install system dependencies required for video decoding and utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
-    libsm6 \
-    libxext6 \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,11 +24,11 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy application codebase
 COPY . .
 
-# Expose Streamlit server port
+# Expose default port (Render overrides via $PORT environment variable)
 EXPOSE 8501
 
 # Container healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:${PORT:-8501}/_stcore/health || exit 1
 
-# Launch Streamlit dashboard
-ENTRYPOINT ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Launch Streamlit dashboard binding dynamically to Render's assigned $PORT
+CMD ["sh", "-c", "streamlit run dashboard/app.py --server.port=${PORT:-8501} --server.address=0.0.0.0"]

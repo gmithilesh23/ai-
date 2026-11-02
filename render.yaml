@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: cricket-ball-tracking-drs
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
