@@ -1,0 +1,28 @@
+# Ball Tracker & Detection Network Configuration
+
+detector:
+  architecture: "TrackNetCricket"
+  input_frames: 3                 # Triple-frame consecutive stack (t-1, t, t+1)
+  input_resolution: [640, 360]    # [Width, Height]
+  heatmap_sigma: 2.5              # Gaussian sigma for ground truth & detection peak
+  confidence_threshold: 0.35      # Peak heatmap threshold to register detection
+  nms_radius: 5                   # Pixel radius for local maxima suppression
+  min_ball_area_px: 4
+  max_ball_area_px: 450
+
+kalman_filter:
+  state_dimensions: 9             # [x, y, z, vx, vy, vz, ax, ay, az]
+  measurement_dimensions: 3       # [x, y, z] in world, or [u, v] in image
+  dt: 0.0166667                   # 1/60s default frame interval
+  process_noise_pos: 0.01
+  process_noise_vel: 0.05
+  process_noise_acc: 0.20
+  measurement_noise_pos: 0.03
+  mahalanobis_gate_threshold: 16.27 # Chi-square 99% confidence for 3 DOF
+
+tracking_logic:
+  max_consecutive_lost_frames: 8
+  min_tracklet_length_for_fit: 6
+  rts_smoothing_enabled: true
+  bounce_detection_window: 5
+  vertical_accel_bounce_threshold: 40.0 # m/s^2 impulse spike at bounce

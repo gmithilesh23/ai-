@@ -1,0 +1,36 @@
+# Aerodynamic, Atmospheric & Impact Physics Parameters
+
+atmosphere:
+  air_density: 1.225              # kg / m^3 at sea level (15°C, 101.3 kPa)
+  gravity: 9.80665                # m / s^2
+  viscosity: 1.81e-5              # kg / (m * s)
+
+aerodynamics:
+  drag_coefficient_base: 0.44     # Standard sphere with seam at cricket Reynolds numbers
+  reynolds_critical: 1.0e5        # Critical Reynolds number for boundary layer turbulence
+  seam_drag_increment: 0.05       # Additional drag caused by proud seam orientation
+  magnus_lift_coefficient: 0.22   # Magnus force proportionality constant
+  swing_lateral_force_max: 0.45   # Maximum lateral force due to seam asymmetry (N)
+
+bounce:
+  # Coefficient of Restitution (COR) for pitch types
+  # Normal velocity after / before: e_z = -v_z' / v_z
+  restitution_normal:
+    hard_turf: 0.58
+    standard_turf: 0.52
+    damp_green: 0.46
+    subcontinent_dry: 0.55
+  # Tangential velocity retention (pitch friction): v_t' / v_t
+  friction_tangential:
+    hard_turf: 0.82
+    standard_turf: 0.78
+    damp_green: 0.72
+    subcontinent_dry: 0.75
+  # Seam / Spin deviation probability & angular range (radians)
+  seam_deviation_std_rad: 0.035   # ~2 degrees seam movement off pitch
+  spin_turn_rad_max: 0.12         # ~7 degrees maximum spin turn off pitch
+
+numerical_integration:
+  method: "rk4"                   # 4th-order Runge-Kutta
+  time_step: 0.001                # 1 ms step for high stability
+  max_simulation_time: 2.0        # Seconds

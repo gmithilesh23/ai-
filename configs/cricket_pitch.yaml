@@ -1,0 +1,47 @@
+# ICC Cricket Pitch Standard Specifications & Camera Geometry
+
+pitch:
+  # Metric dimensions in meters
+  length_between_stumps: 20.1168  # 22 yards
+  pitch_width: 3.05               # 10 feet
+  crease_popping_distance: 1.2192 # 4 feet in front of bowling crease
+  bowling_crease_width: 2.6416    # 8 feet 8 inches
+  return_crease_length: 2.4384    # At least 8 feet from popping crease
+  
+wicket:
+  stump_height: 0.7112            # 28 inches (from pitch surface)
+  bails_height: 0.0127            # 0.5 inches
+  total_wicket_height: 0.7239     # 28.5 inches
+  wicket_width: 0.2286            # 9 inches (outer stump to outer stump)
+  stump_diameter: 0.035           # ~3.5 cm
+  stump_spacing: 0.079            # Center-to-center spacing
+  
+ball:
+  radius: 0.036                   # 3.6 cm (diameter 7.2 cm)
+  mass: 0.160                     # 160 grams (5.5 - 5.75 oz)
+  circumference: 0.226            # ~22.6 cm
+  seam_width: 0.005               # 5 mm seam width
+
+zones:
+  # Distances measured from bowler's stumps (Y=0) towards batsman's stumps (Y=20.12)
+  # Batting popping crease is at Y = 20.12 - 1.22 = 18.90m
+  lengths:
+    yorker: [17.5, 19.5]
+    full: [15.5, 17.5]
+    good_length: [13.0, 15.5]
+    short_of_length: [10.5, 13.0]
+    bouncer: [6.0, 10.5]
+  lines:
+    wide_outside_off: [-2.0, -0.6]
+    outside_off: [-0.6, -0.15]
+    in_line: [-0.15, 0.15]        # Stumps line
+    down_leg: [0.15, 0.6]
+    wide_down_leg: [0.6, 2.0]
+
+camera_default:
+  # High-behind bowler broadcast camera (standard 3rd umpire / tracking camera angle)
+  position: [0.0, -4.5, 3.8]     # [X (lateral), Y (behind bowler), Z (height)]
+  target: [0.0, 14.0, 0.5]        # Focus point on pitch
+  fov_vertical_deg: 32.0
+  resolution: [1280, 720]
+  fps: 60.0

@@ -1,0 +1,34 @@
+# ==============================================================================
+# Match-Adaptive AI Cricket Ball Tracking & DRS Trajectory Prediction System
+# Requirements Specification
+# ==============================================================================
+
+# Core Numerical & Scientific Computing
+numpy>=1.24.0,<3.0.0
+scipy>=1.10.0
+pandas>=2.0.0
+
+# Deep Learning & Neural Architectures
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Computer Vision & Video Processing
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Bayesian State Estimation & Tracking
+filterpy>=1.4.5
+
+# Machine Learning & Adaptive Residual Learning
+scikit-learn>=1.3.0
+# Optional / for Phase 6-7 full pipeline:
+# xgboost>=2.0.0
+
+# Interactive Dashboard & Visual Analytics
+streamlit>=1.30.0
+plotly>=5.18.0
+matplotlib>=3.7.0
+
+# Automated Testing & Verification
+pytest>=8.0.0
+
