@@ -1,0 +1,9 @@
+services:
+  cricket-ai-drs:
+    build: .
+    container_name: cricket-ai-drs
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
